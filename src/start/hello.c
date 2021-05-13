@@ -3,22 +3,31 @@
 void euklid();
 void interest();
 void square(int a, int b);
-
-
-
 int main()
 {
 //interest();	
 //euklid();
-//square(20, 36);
-	int i = 0;
-while(getchar() != -1)
+//square(20, 36)
+
+char string[30];	
+scanf("%s", string);
+int i = 0;
+//int tab_number;
+//tab_number = getchar();
+
+//printf("%d", tab_number);
+
+for(i;i<30; i= i+1)
 {
-	i = i + 1;
-
+	if(string[i] == 92)
+	{
+		printf("Success");
+		break;
+	}
 }
-printf("Siehe Zeichen Zahl::  %d", i);
+printf("%c", string[i]);
 
+printf("%s", string);
 return 0;
 }
 
