@@ -2,13 +2,13 @@
 #include <limits.h>
 
 #define MAX_CHAR 30
-double pot(double base, int exp);
+double pow_int_exp(double base, int exp);
 void not_initialized();
 
 
 int main(){
 not_initialized();
-//printf("Result: %f", pot(2, 8));
+//printf("\n\n Result: %f", pow(16, 3));
 }
 
 void not_initialized(){
@@ -16,52 +16,56 @@ void not_initialized(){
 
 char input[MAX_CHAR]={0};
 int count= 0;
-int output = 0;
+double output = 0;
 int dec = 0;
+printf("Please enter Hex number\n");
 while(count!=MAX_CHAR-1 && scanf("%c",&input[count]) &&input[count] != '\n'  )
 {
 	count++;
 }
-int i = 0;
-while(i < count){
-	if(input[i] >= '0' && input[i] <= '9'){
-		dec = input[i]-'0'; 
-	} else if (input[i] >= 'A' && input[i] <= 'F'){
-		dec = input[i] - 'A' + 10;
-	} else if (input[i] >= 'a' && input[i] <= 'f'){
-		dec = input[i] - 'a' + 10;
+int i = 0; //counter for exponent
+count -=1; // since array starts with 0
+while(0 <= count){
+	if(input[count] >= '0' && input[count] <= '9'){
+		dec = input[count]-'0'; 
+	} else if (input[count] >= 'A' && input[count] <= 'F'){
+		dec = input[count] - 'A' + 10;
+	} else if (input[count] >= 'a' && input[count] <= 'f'){
+		dec = input[count] - 'a' + 10;
+	}else{
+		printf("Not a Hex number");
+		break;
 	}
-
-printf("Output: %d, Input: %d, pot: %d \n i = %d", output, dec,(int)  pot(16,i), i);
-output +=  dec *(int) pot(16,i);
-printf("Array: %c\n", input[i]);
-i += 1;
+printf("Output: %f, Input: %d, pow: %f  count = %d", output, dec,  pow_int_exp(16,count), count);
+output +=  dec * pow_int_exp(16, i);
+count -= 1;
+i ++;
 }
-printf("\n");
-printf("%d", output);
+printf("\n\n\n");
+printf("Result %f", output);
 
 }
 
-double pot(double base, int  exp){ //power of two
-	double pot_value = 1;
+double pow_int_exp(double base, int  exp){ //power of two
+	double pow_value = 1;
 	if(exp == 0){
 		return 1;
 		}
 	if(exp > 0){
 		while(exp > 0){
-			pot_value  = pot_value * base;
+			pow_value  = pow_value * base;
 			exp = exp-1;
-			//printf("Exp: %d\nPot_value: %f\n", exp, pot_value); 
-			}
-		return pot_value;
+//			printf("Exp: %d\nPot_value: %f\n", exp, pow_value); 
+		}
+		return pow_value;
 		}
 	else{
 		while(exp < 0){
-			pot_value = pot_value * base;
+			pow_value = pow_value * base;
 			exp = exp + 1;
-		//	printf("Exp: %d\nPot_value: %f\n", exp, pot_value); 
+		//	printf("Exp: %d\nPot_value: %f\n", exp, pow_value); 
 			}	
-		return 1/pot_value;
+		return 1/pow_value;
 		}
 }
 
